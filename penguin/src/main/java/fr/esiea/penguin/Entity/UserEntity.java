@@ -1,9 +1,9 @@
-package fr.esiea.entities;
+package fr.esiea.penguin.Entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-public class Users implements Serializable {
+public class UserEntity implements Serializable {
 
 	@Id
 	@GeneratedValue
@@ -11,32 +11,32 @@ public class Users implements Serializable {
 
 	@Column(nullable = false)
 	private String pseudo;
-	
+
 	@Column(nullable = false)
 	private String lastname;
-	
+
 	@Column(nullable = false)
 	private String firstname;
 
 	@Column(nullable = false)
 	private String mail;
-	
+
 	@Column(nullable = false)
 	private String password;
 
-	protected Users() {
+	protected UserEntity() {
 		// no-args constructor required by JPA spec
 		// this one is protected since it shouldn't be used directly
 	}
 
-	public Users(String pseudo, String lastname, String firstname, String mail, String password) {
+	public UserEntity(String pseudo, String lastname, String firstname, String mail, String password) {
 		this.pseudo = pseudo;
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.mail = mail;
 		this.password = password;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
