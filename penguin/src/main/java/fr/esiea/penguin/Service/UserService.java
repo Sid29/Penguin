@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.annotation.ManagedBean;
 
+import org.springframework.stereotype.Service;
+
 import fr.esiea.penguin.DAO.UserDAO;
 import fr.esiea.penguin.Entity.UserEntity;
 
+@Service("UserService")
 public class UserService {
 
 	private static UserDAO userDao;

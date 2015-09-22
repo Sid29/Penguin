@@ -1,5 +1,7 @@
 package fr.esiea.penguin;
 
+import java.util.List;
+
 import org.h2.server.web.WebServlet;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
@@ -8,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
+import fr.esiea.penguin.Entity.UserEntity;
 import fr.esiea.penguin.Service.UserService;
 
 @Controller
@@ -20,10 +23,8 @@ public class App
 	@ResponseBody
 	String home() {
 		userService = new UserService();
-		int user = userService.countAll();
-		
-
-		return "Hello " + user +"!";
+		List<UserEntity> users = userService.findAll();
+		return "Hello " + users.get(0).getFirstname() +"!";
 	}
 	
     @Bean
