@@ -3,31 +3,30 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Users")
 public class UserEntity implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
-/*	@Id
+	@Id
 	@GeneratedValue
 	private int id;
 
-	@Column(nullable = false)
+	@Column(name="pseudo", nullable = false)
 	private String pseudo;
 
-	@Column(nullable = false)
+	@Column(name="lastname", nullable = false)
 	private String lastname;
 
-	@Column(nullable = false)
+	@Column(name="firstname", nullable = false)
 	private String firstname;
 
-	@Column(nullable = false)
+	@Column(name="mail", nullable = false)
 	private String mail;
 
-	@Column(nullable = false)
+	@Column(name="password", nullable = false)
 	private String password;
 
-	protected UserEntity() {
-		// no-args constructor required by JPA spec
-		// this one is protected since it shouldn't be used directly
-	}
 
 	public UserEntity(String pseudo, String lastname, String firstname, String mail, String password) {
 		this.pseudo = pseudo;
@@ -79,5 +78,5 @@ public class UserEntity implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}*/
+	}
 }

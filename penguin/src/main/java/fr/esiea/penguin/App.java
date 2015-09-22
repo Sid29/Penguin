@@ -1,7 +1,5 @@
 package fr.esiea.penguin;
 
-//import javax.ejb.EJB;
-
 import org.h2.server.web.WebServlet;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
@@ -10,20 +8,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
-//import fr.esiea.penguin.Entity.UserEntity;
+import fr.esiea.penguin.Service.UserService;
 
 @Controller
 @EnableAutoConfiguration
 public class App 
 {
-	//@EJB
-	//UserEntity currentUser;
+	UserService userService;
 	
 	@RequestMapping("/")
 	@ResponseBody
 	String home() {
-	//	String toto = currentUser.getPseudo();
-		return "Hello " + "toto" +"!";
+		userService = new UserService();
+		int user = userService.countAll();
+		
+
+		return "Hello " + user +"!";
 	}
 	
     @Bean
