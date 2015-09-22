@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class UserEntity implements Serializable {
 
-	@Id
+/*	@Id
 	@GeneratedValue
 	private int id;
 
@@ -79,5 +79,5 @@ public class UserEntity implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
+	}*/
 }
