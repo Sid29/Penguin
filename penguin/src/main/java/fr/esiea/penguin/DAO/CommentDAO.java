@@ -15,7 +15,7 @@ public class CommentDAO {
 	private Session currentSession;	
 	private Transaction currentTransaction;
 	
-	private String allUsers = "from CommentEntity";
+	private String allComments = "from CommentEntity";
 
 	public CommentDAO() {
 	}
@@ -83,7 +83,7 @@ public class CommentDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<CommentEntity> findAll() {
-		List<CommentEntity> comments = (List<CommentEntity>) getCurrentSession().createQuery(allUsers).list();
+		List<CommentEntity> comments = (List<CommentEntity>) getCurrentSession().createQuery(allComments).list();
 		return comments;
 	}
 

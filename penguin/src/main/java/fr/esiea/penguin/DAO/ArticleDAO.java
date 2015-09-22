@@ -15,7 +15,7 @@ public class ArticleDAO {
 	private Session currentSession;	
 	private Transaction currentTransaction;
 	
-	private String allUsers = "from ArticleEntity";
+	private String allArticles = "from ArticleEntity";
 
 	public ArticleDAO() {
 	}
@@ -83,7 +83,7 @@ public class ArticleDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<ArticleEntity> findAll() {
-		List<ArticleEntity> articles = (List<ArticleEntity>) getCurrentSession().createQuery(allUsers).list();
+		List<ArticleEntity> articles = (List<ArticleEntity>) getCurrentSession().createQuery(allArticles).list();
 		return articles;
 	}
 
