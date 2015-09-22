@@ -2,10 +2,7 @@ package fr.esiea.penguin.Service;
 
 import java.util.List;
 
-import javax.annotation.ManagedBean;
-
 import org.springframework.stereotype.Service;
-
 import fr.esiea.penguin.DAO.UserDAO;
 import fr.esiea.penguin.Entity.UserEntity;
 
@@ -50,14 +47,6 @@ public class UserService {
 		userDao.closeCurrentSession();
 		return users;
 	}
-	
-	public int countAll() {
-		userDao.openCurrentSession();
-		int nbreUsers =   userDao.countAll();		
-		userDao.closeCurrentSession();
-		return nbreUsers;
-	}
-
 
 	public void deleteAll() {
 		userDao.openCurrentSessionwithTransaction();

@@ -2,7 +2,6 @@ package fr.esiea.penguin.DAO;
 
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,16 +9,15 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 import fr.esiea.penguin.Entity.ArticleEntity;
-import fr.esiea.penguin.Entity.UserEntity;
 
-public class UserDAO {
+public class ArticleDAO {
 
 	private Session currentSession;	
 	private Transaction currentTransaction;
 	
-	private String allUsers = "from UserEntity";
+	private String allUsers = "from ArticleEntity";
 
-	public UserDAO() {
+	public ArticleDAO() {
 	}
 
 	public Session openCurrentSession() {
@@ -66,33 +64,33 @@ public class UserDAO {
 		this.currentTransaction = currentTransaction;
 	}
 
-	public void persist(UserEntity entity) {
+	public void persist(ArticleEntity entity) {
 		getCurrentSession().save(entity);
 	}
 
-	public void update(UserEntity entity) {
+	public void update(ArticleEntity entity) {
 		getCurrentSession().update(entity);
 	}
 
-	public UserEntity findById(String id) {
-		UserEntity user = (UserEntity) getCurrentSession().get(UserEntity.class, id);
-		return user; 
+	public ArticleEntity findById(String id) {
+		ArticleEntity article = (ArticleEntity) getCurrentSession().get(ArticleEntity.class, id);
+		return article; 
 	}
 
-	public void delete(UserEntity entity) {
+	public void delete(ArticleEntity entity) {
 		getCurrentSession().delete(entity);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<UserEntity> findAll() {
-		List<UserEntity> users = (List<UserEntity>) getCurrentSession().createQuery(allUsers).list();
-		return users;
+	public List<ArticleEntity> findAll() {
+		List<ArticleEntity> articles = (List<ArticleEntity>) getCurrentSession().createQuery(allUsers).list();
+		return articles;
 	}
 
 
 	public void deleteAll() {
-		List<UserEntity> entityList = findAll();
-		for (UserEntity entity : entityList) {
+		List<ArticleEntity> entityList = findAll();
+		for (ArticleEntity entity : entityList) {
 			delete(entity);
 		}
 	}

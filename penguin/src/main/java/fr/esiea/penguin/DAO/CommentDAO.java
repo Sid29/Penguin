@@ -2,24 +2,22 @@ package fr.esiea.penguin.DAO;
 
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-import fr.esiea.penguin.Entity.ArticleEntity;
-import fr.esiea.penguin.Entity.UserEntity;
+import fr.esiea.penguin.Entity.CommentEntity;
 
-public class UserDAO {
+public class CommentDAO {
 
 	private Session currentSession;	
 	private Transaction currentTransaction;
 	
-	private String allUsers = "from UserEntity";
+	private String allUsers = "from CommentEntity";
 
-	public UserDAO() {
+	public CommentDAO() {
 	}
 
 	public Session openCurrentSession() {
@@ -66,33 +64,33 @@ public class UserDAO {
 		this.currentTransaction = currentTransaction;
 	}
 
-	public void persist(UserEntity entity) {
+	public void persist(CommentEntity entity) {
 		getCurrentSession().save(entity);
 	}
 
-	public void update(UserEntity entity) {
+	public void update(CommentEntity entity) {
 		getCurrentSession().update(entity);
 	}
 
-	public UserEntity findById(String id) {
-		UserEntity user = (UserEntity) getCurrentSession().get(UserEntity.class, id);
-		return user; 
+	public CommentEntity findById(String id) {
+		CommentEntity comment = (CommentEntity) getCurrentSession().get(CommentEntity.class, id);
+		return comment; 
 	}
 
-	public void delete(UserEntity entity) {
+	public void delete(CommentEntity entity) {
 		getCurrentSession().delete(entity);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<UserEntity> findAll() {
-		List<UserEntity> users = (List<UserEntity>) getCurrentSession().createQuery(allUsers).list();
-		return users;
+	public List<CommentEntity> findAll() {
+		List<CommentEntity> comments = (List<CommentEntity>) getCurrentSession().createQuery(allUsers).list();
+		return comments;
 	}
 
 
 	public void deleteAll() {
-		List<UserEntity> entityList = findAll();
-		for (UserEntity entity : entityList) {
+		List<CommentEntity> entityList = findAll();
+		for (CommentEntity entity : entityList) {
 			delete(entity);
 		}
 	}

@@ -9,6 +9,7 @@
    <property name="hibernate.connection.url">jdbc:h2:~/pengu</property>
    <property name="hibernate.connection.username">pengu</property>
    <property name="hibernate.connection.password">pengu</property>
+   <property name="hibernate.hbm2ddl.auto">create</property>
    <property name="hibernate.hbm2ddl.auto">update</property>
    <property name="show_sql">false</property>
    <property name="hibernate.current_session_context_class">thread</property>
