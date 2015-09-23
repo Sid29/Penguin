@@ -16,6 +16,7 @@ public class ArticleDAO {
 	private Transaction currentTransaction;
 	
 	private String allArticles = "from ArticleEntity";
+	private String getLastArticle = "from ArticleEntity where dateCreation in (select Max(dateCreation) from ArticleEntity)";
 
 	public ArticleDAO() {
 	}
@@ -85,6 +86,11 @@ public class ArticleDAO {
 	public List<ArticleEntity> findAll() {
 		List<ArticleEntity> articles = (List<ArticleEntity>) getCurrentSession().createQuery(allArticles).list();
 		return articles;
+	}
+	
+	public ArticleEntity getLastArticle() {
+		ArticleEntity lastArticle = (ArticleEntity) getCurrentSession().createQuery(getLastArticle);
+		return lastArticle;
 	}
 
 

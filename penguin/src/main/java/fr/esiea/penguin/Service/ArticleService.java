@@ -1,7 +1,13 @@
 package fr.esiea.penguin.Service;
 
 import java.util.List;
+
+import javax.validation.constraints.Past;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.esiea.penguin.DAO.ArticleDAO;
 import fr.esiea.penguin.Entity.ArticleEntity;
@@ -53,8 +59,15 @@ public class ArticleService {
 		articleDao.deleteAll();
 		articleDao.closeCurrentSessionwithTransaction();
 	}
-
+	
 	public ArticleDAO articleDao() {
 		return articleDao;
+	}
+
+	public ArticleEntity getLastArticle() {
+		articleDao.openCurrentSession();
+		ArticleEntity article = articleDao.getLastArticle();
+		articleDao.closeCurrentSession();
+		return article;
 	}
 }

@@ -2,12 +2,14 @@ package fr.esiea.penguin.DAO;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
+import fr.esiea.penguin.Entity.ArticleEntity;
 import fr.esiea.penguin.Entity.CommentEntity;
 
 public class CommentDAO {
@@ -16,6 +18,7 @@ public class CommentDAO {
 	private Transaction currentTransaction;
 	
 	private String allComments = "from CommentEntity";
+	private String commentsByArticleId = "from comments where id_article = :id_article"; 
 
 	public CommentDAO() {
 	}
@@ -79,6 +82,14 @@ public class CommentDAO {
 
 	public void delete(CommentEntity entity) {
 		getCurrentSession().delete(entity);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<CommentEntity> getCommentsByArticleId(int idArticle) {
+		Query query = getCurrentSession().createQuery(commentsByArticleId);
+		query.setParameter("id_article", idArticle);
+		List<CommentEntity> listComments = query.list();
+		return listComments;
 	}
 
 	@SuppressWarnings("unchecked")

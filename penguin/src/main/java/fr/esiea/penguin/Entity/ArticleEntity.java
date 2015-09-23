@@ -1,5 +1,7 @@
 package fr.esiea.penguin.Entity;
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,6 +19,12 @@ public class ArticleEntity implements Serializable {
 
 	@Column(name="author", nullable = false)
 	private UserEntity author;
+	
+	@Column(name="dateCreation", nullable = false)
+	private Date dateCreation;
+	
+	@Column(name="dateLastUpdate", nullable = true)
+	private Date dateLastUpdate;
 
 	@Column(name="body", nullable = false)
 	private String body;
@@ -25,9 +33,11 @@ public class ArticleEntity implements Serializable {
 	public ArticleEntity() {
 	}
 	
-	public ArticleEntity(String title, UserEntity author, String body) {
+	public ArticleEntity(String title, UserEntity author, Date dateCreation, Date dateLastUpdate, String body) {
 		this.title = title;
 		this.author = author;
+		this.dateCreation = dateCreation;
+		this.dateLastUpdate = dateLastUpdate;
 		this.body = body;
 	}
 
@@ -49,6 +59,22 @@ public class ArticleEntity implements Serializable {
 
 	public void setAuthor(UserEntity author) {
 		this.author = author;
+	}
+
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+
+	public Date getDateLastUpdate() {
+		return dateLastUpdate;
+	}
+
+	public void setDateLastUpdate(Date dateLastUpdate) {
+		this.dateLastUpdate = dateLastUpdate;
 	}
 
 	public String getBody() {

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Pengu</title>
+		<title>Article from Pengu</title>
 		<link rel="icon" type="image/png" href="img/logo.png" />
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<script type="text/javascript" src="js/common.js"></script>
 	</head>
 	<body>
-		<h1>This is a Heading</h1>
-		<p>This is a paragraph.</p>
+		<h1 id="title" value="test">{title}</h1>
+		<h3 id="author">{author}</h3>
+		<h3 id="date_article">{date_article}</h3>
+		<p id="body">{body}</p>
 	</body>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </html>

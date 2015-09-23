@@ -2,10 +2,15 @@ package fr.esiea.penguin.Service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import fr.esiea.penguin.DAO.UserDAO;
 import fr.esiea.penguin.Entity.UserEntity;
 
+@Controller
 @Service("UserService")
 public class UserService {
 
@@ -41,6 +46,8 @@ public class UserService {
 		userDao.closeCurrentSessionwithTransaction();
 	}
 
+	@RequestMapping(value="/findAllUsers")
+	@ResponseBody
 	public List<UserEntity> findAll() {
 		userDao.openCurrentSession();
 		List<UserEntity> users = userDao.findAll();

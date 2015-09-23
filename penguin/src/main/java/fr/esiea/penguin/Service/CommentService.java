@@ -47,6 +47,13 @@ public class CommentService {
 		commentDao.closeCurrentSession();
 		return comments;
 	}
+	
+	public List<CommentEntity> getCommentsByArticleId(int idArticle){
+		commentDao.openCurrentSession();
+		List<CommentEntity> comments = commentDao.getCommentsByArticleId(idArticle);
+		commentDao.closeCurrentSession();
+		return comments;
+	}
 
 	public void deleteAll() {
 		commentDao.openCurrentSessionwithTransaction();
