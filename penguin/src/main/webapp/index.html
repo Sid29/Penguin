@@ -7,10 +7,78 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	</head>
 	<body>
-		<h1 id="title" value="test">{title}</h1>
-		<h3 id="author">{author}</h3>
-		<h3 id="date_article">{date_article}</h3>
-		<p id="body">{body}</p>
+		
+		<nav class="navbar navbar-default">
+		<div id="header" class="header col-md-12"><span class="titleBlog">Pengu Blog !</span></div>
+  			<div class="container-fluid">
+    			<div class="navbar-header navbar-right">
+      				<ul class="nav navbar-nav">
+       					<li><button class="btn btn-lg glyphicon glyphicon-user" type="button" 
+data-toggle="modal" data-target="#connection"></button></li>
+        				<li><button class="btn btn-lg glyphicon glyphicon-user" type="button" 
+data-toggle="modal" data-target="#addUser"></button></li>
+        			</ul>
+    			</div>
+  			</div>
+		</nav>
+
+		<div class="col-md-12">
+			<div class="col-md-1"></div>
+			<div id="left_panel" class="col-md-2 bloc-fixe"><img src="img/avatar_pengu.png" 
+alt="avatar_pengu" class="avatar col-md-6"/><h3 id="name_pengu" class="col-md-6" value="No 
+name">{firstname}</h3>
+			</div>
+			<div class="col-md-1"></div>
+			<div id=articles class="col-md-7 bloc-variable">
+				Last Article
+				<h1 id="title" value="test">{title}</h1>
+				<h3 id="author">{author}</h3>
+				<h3 id="date_article">{date_article}</h3>
+				<p id="body">{body}</p>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div id="footer"></div>
+		
+		
+				<div class="modal fade" id="connection" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span 
+aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>	
+		
+	<div class="modal fade" id="addUser" tabindex="-1" role="dialog">
+  	<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span 
+aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>		
+		
 	</body>
 	<script type="text/javascript" src="js/common.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

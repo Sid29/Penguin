@@ -3,7 +3,6 @@ document.getElementById('title').innerHTML = title;
 
 
 
-
 url = "/controller";
 dataRequest = "";
 $.ajax({
