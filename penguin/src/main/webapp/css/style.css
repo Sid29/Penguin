@@ -1,9 +1,10 @@
 /*Header*/
-.header {
-  	background-image:url(../img/banniere-1.jpg);
+.container-fluid{
+	background-color:blue;
+	background-image:url(../img/banniere.jpg);
   	background-position : top center;
   	background-repeat: repeat-x;
-  	background-size: 20%;
+  	background-size: 25%;
 }
 .titleBlog{
 	color : blue;
@@ -31,4 +32,12 @@
  	margin-top: 10px;
 	margin-bottom: 10px;
   	border:solid 1px;
+}
+
+
+/*Footer*/
+.footer{
+	color : blue;
+	text-align:center;
+	vertical-align:middle;
 }

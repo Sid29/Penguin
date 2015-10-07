@@ -5,28 +5,26 @@
 		<link rel="icon" type="image/png" href="img/logo.png" />
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	</head>
-	<body>
-		
+	<body>			
 		<nav class="navbar navbar-default">
-		<div id="header" class="header col-md-12"><span class="titleBlog">Pengu Blog !</span></div>
+			<div id="header" class="header col-md-12"><span class="titleBlog">Pengu Blog !</span></div>
   			<div class="container-fluid">
     			<div class="navbar-header navbar-right">
       				<ul class="nav navbar-nav">
-       					<li><button class="btn btn-lg glyphicon glyphicon-user" type="button" 
-data-toggle="modal" data-target="#connection"></button></li>
-        				<li><button class="btn btn-lg glyphicon glyphicon-user" type="button" 
-data-toggle="modal" data-target="#addUser"></button></li>
+       					<li><button class="btn btn-lg glyphicon glyphicon-user" type="button" data-toggle="modal" data-target="#connection"></button></li>
+        				<li><button class="btn btn-lg glyphicon glyphicon-user" type="button" data-toggle="modal" data-target="#addUser"></button></li>
         			</ul>
     			</div>
   			</div>
 		</nav>
 
-		<div class="col-md-12">
-			<div class="col-md-1"></div>
-			<div id="left_panel" class="col-md-2 bloc-fixe"><img src="img/avatar_pengu.png" 
-alt="avatar_pengu" class="avatar col-md-6"/><h3 id="name_pengu" class="col-md-6" value="No 
-name">{firstname}</h3>
+		<div class="col-md-12">		
+			<div id="left_panel" class="col-md-2 bloc-fixe">
+				<img src="img/logo.png" alt="avatar_pengu" class="avatar col-md-6"/>
+				<h3 id="name_pengu" class="col-md-6" value="No name">{firstname}</h3>
 			</div>
 			<div class="col-md-1"></div>
 			<div id=articles class="col-md-7 bloc-variable">
@@ -38,49 +36,84 @@ name">{firstname}</h3>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
-		<div id="footer"></div>
+		<div id="footer" class="footer col-md-12">
+			Estèphe SUSTRAC - Marie DAGNIAU<br/>
+			Etudiants à l'ESIEA
+		</div>	
 		
 		
-				<div class="modal fade" id="connection" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span 
-aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>	
-		
+		<div class="modal fade" id="connection" tabindex="-1" role="dialog">
+  		<div class="modal-dialog" role="document">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        				<span aria-hidden="true">&times;</span>
+        			</button>
+        			<h4 class="modal-title" id="myModalLabel">Sign in</h4>
+      			</div>
+     			<div class="modal-body">
+        			<form role="form" data-toggle="validator">
+  						<div class="form-group">
+    						<label for="login">Pseudo</label>
+    						<input type="text" class="form-control" id="login" placeholder="Pseudo" required>
+  						</div>
+  						<div class="form-group">
+   							<label for="password">Password</label>
+    						<input type="password" class="form-control" id="password" placeholder="Password" required>
+  						</div>
+      			</div>
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			<button type="submit" class="btn btn-primary">Submit</button>
+        			</form>
+      			</div>
+    		</div>
+  		</div>
+	</div>		
+	
 	<div class="modal fade" id="addUser" tabindex="-1" role="dialog">
-  	<div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span 
-aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>		
-		
+  			<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+      				<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        					<span aria-hidden="true">&times;</span>
+        				</button>
+        				<h4 class="modal-title" id="myModalLabel">Sign up</h4>
+      				</div>
+      				<div class="modal-body">
+        				<form id="inscriptionForm" role="form" data-toggle="validator" method="POST" enctype="application/json">
+        					<div class="form-group">
+    							<label for="pseudoInscription">Pseudo</label>
+    							<input name="pseudoInscription" type="text" class="form-control" id="pseudoInscription" placeholder="Pseudo" required>
+  							</div>
+        					<div class="form-group">
+    							<label for="lastnameInscription">Lastname</label>
+    							<input name="lastnameInscription" type="text" class="form-control" id="lastnameInscription" placeholder="Lastname" required>
+  							</div>
+  							<div class="form-group">
+    							<label for="firstnameInscription">Firstname</label>
+    							<input name="firstnameInscription" type="text" class="form-control" id="firstnameInscription" placeholder="Firstname" required>
+  							</div>
+  							<div class="form-group">
+    							<label for="emailInscription">Email address</label>
+    							<input name="emailInscription" type="email" class="form-control" id="emailInscription" placeholder="Email" required>
+  							</div>
+  							<div class="form-group">
+   								<label for="passwordInscription">Password</label>
+    							<input name="passwordInscription" type="password" class="form-control" id="passwordInscription" placeholder="Password" required>
+  							</div>  							
+						</form>
+     				</div>
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        				<button type="submit" class="btn btn-primary" id="submitFormInscription">Submit</button>
+      				</div>
+    			</div>
+  			</div>
+		</div>		
 	</body>
-	<script type="text/javascript" src="js/common.js"></script>
+	
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>	
 </html>
