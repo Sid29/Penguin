@@ -1,5 +1,6 @@
 package fr.esiea.penguin.DAO;
 
+import java.io.Console;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -16,8 +17,9 @@ public class UserDAO {
 
 	private Session currentSession;	
 	private Transaction currentTransaction;
-	
+
 	private String allUsers = "from UserEntity";
+	private String toLoginByPseudoAndPassword = "from UserEntity where pseudo = :pseudo and password = :password";
 
 	public UserDAO() {
 	}
@@ -32,16 +34,16 @@ public class UserDAO {
 		currentTransaction = currentSession.beginTransaction();
 		return currentSession;
 	}
-	
+
 	public void closeCurrentSession() {
 		currentSession.close();
 	}
-	
+
 	public void closeCurrentSessionwithTransaction() {
 		currentTransaction.commit();
 		currentSession.close();
 	}
-	
+
 	private static SessionFactory getSessionFactory() {
 		Configuration configuration = new Configuration().configure();
 		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
@@ -95,5 +97,20 @@ public class UserDAO {
 		for (UserEntity entity : entityList) {
 			delete(entity);
 		}
+	}
+
+	public UserEntity toLogin(String login, String password) {
+		UserEntity userConnected = null;
+		Query query = getCurrentSession().createQuery(toLoginByPseudoAndPassword);
+		query.setParameter("pseudo", login);
+		query.setParameter("password", password);
+		try {
+			userConnected = (UserEntity) query.list().get(0);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Aucun utilisateur ne correcpond à la requête.");
+		}
+		return userConnected;
 	}
 }

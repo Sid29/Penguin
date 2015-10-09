@@ -38,6 +38,13 @@ public class UserService {
 		userDao.closeCurrentSession();
 		return user;
 	}
+	
+	public UserEntity toLogin(String login, String password) {
+		userDao.openCurrentSession();
+		UserEntity result = userDao.toLogin(login, password);
+		userDao.closeCurrentSession();
+		return result;
+	}
 
 	public void delete(String id) {
 		userDao.openCurrentSessionwithTransaction();
@@ -46,8 +53,6 @@ public class UserService {
 		userDao.closeCurrentSessionwithTransaction();
 	}
 
-	@RequestMapping(value="/findAllUsers")
-	@ResponseBody
 	public List<UserEntity> findAll() {
 		userDao.openCurrentSession();
 		List<UserEntity> users = userDao.findAll();
