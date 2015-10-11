@@ -80,8 +80,4 @@ public class CommentEntity implements Serializable {
 	public ArticleEntity getIdArticle() {
 		return idArticle;
 	}
-
-	public void setIdArticle(ArticleEntity body) {
-		this.idArticle = idArticle;
-	}
 }

@@ -9,7 +9,6 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-import fr.esiea.penguin.Entity.ArticleEntity;
 import fr.esiea.penguin.Entity.CommentEntity;
 
 public class CommentDAO {
@@ -18,7 +17,7 @@ public class CommentDAO {
 	private Transaction currentTransaction;
 	
 	private String allComments = "from CommentEntity";
-	private String commentsByArticleId = "from comments where id_article = :id_article"; 
+	private String commentsByArticleId = "from CommentEntity where id_article = :id_article"; 
 
 	public CommentDAO() {
 	}

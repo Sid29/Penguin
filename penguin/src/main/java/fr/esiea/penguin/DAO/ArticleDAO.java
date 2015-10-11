@@ -73,7 +73,7 @@ public class ArticleDAO {
 		getCurrentSession().update(entity);
 	}
 
-	public ArticleEntity findById(String id) {
+	public ArticleEntity findById(int id) {
 		ArticleEntity article = (ArticleEntity) getCurrentSession().get(ArticleEntity.class, id);
 		return article; 
 	}
@@ -89,7 +89,7 @@ public class ArticleDAO {
 	}
 	
 	public ArticleEntity getLastArticle() {
-		ArticleEntity lastArticle = (ArticleEntity) getCurrentSession().createQuery(getLastArticle);
+		ArticleEntity lastArticle = (ArticleEntity) getCurrentSession().createQuery(getLastArticle).list().get(0);
 		return lastArticle;
 	}
 

@@ -1,9 +1,10 @@
 package fr.esiea.penguin;
 
-import java.lang.reflect.Array;
+import java.util.Date;
 import java.util.List;
 
 import org.h2.server.web.WebServlet;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
@@ -31,14 +32,20 @@ public class App
 	CommentService commentService = new CommentService();
 	UserService userService  = new UserService();
 
-	@RequestMapping("/articles")
-	@ResponseBody
-	List<ArticleEntity> sendArticles(){
-		List<ArticleEntity> allArticles = articleService.findAll();
-		return allArticles;
+	/**********************************************************
+	 * 
+	 * DECLARATION VARIABLES GLOBALES
+	 *
+	 **********************************************************/
+	private UserEntity userConnected = null;
+	private boolean connected = false;
 
-	}
 
+	/**********************************************************
+	 * 
+	 * PART ABOUT USERS
+	 *
+	 **********************************************************/
 	@RequestMapping(value="/addUser", method=RequestMethod.GET)
 	@ResponseBody
 	boolean addUser(
@@ -61,39 +68,138 @@ public class App
 		return result;
 	}
 
-
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	@ResponseBody
-	String toLogin(
-			@RequestParam("login") String login, 
-			@RequestParam("password") String password
-			) 
+	boolean toLogin(@RequestParam("login") String login, 
+			@RequestParam("password") String password) 
 	{
-		JSONObject userConnectedJSON = new JSONObject();
-		UserEntity userConnected = null;
-		try{
+		try
+		{
 			userConnected = userService.toLogin(login, password);
-			userConnectedJSON.put("firstname", userConnected.getFirstname());
+			connected = true;
 			System.out.println("L'utilisateur n°" + userConnected.getId() + " est connecté.");
 		}
 		catch(Exception e)
 		{
-			System.out.println(e.getStackTrace());
+			System.out.println(e.getStackTrace().toString());
 		}
-		return userConnected.getFirstname();
+		return connected;
 	}
 
-	@RequestMapping("/lastArticleWithComments")
+	@RequestMapping(value="/userConnected", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	Object[] sendLastArticlesWithComments(){
-		Object[] result = new Array[2];
+	JSONObject returnUserConnected(){
+		JSONObject userConnectedJSON = new JSONObject();
+		try
+		{
+			userConnectedJSON.put("firstname", userConnected.getFirstname());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getStackTrace().toString());
+		}
+		System.out.println("objet json " +userConnectedJSON.get("firstname"));
+		return userConnectedJSON;
+	}
+
+
+	/**********************************************************
+	 * 
+	 * PART ABOUT ARTICLES
+	 *
+	 **********************************************************/
+	@RequestMapping(value="/addArticle", method=RequestMethod.GET)
+	@ResponseBody
+	boolean addArticle(
+			@RequestParam("title") String title, 
+			@RequestParam("body") String body
+			) {
+		boolean result = false;
+		try {
+			Date dateCreation = new Date();
+			Date dateLastUpdate = new Date();
+			ArticleEntity newArticle = new ArticleEntity(title, userConnected, dateCreation, dateLastUpdate, body);
+			articleService.persist(newArticle);
+			result = true;
+		}
+		catch(Exception e)
+		{
+			result = false;
+		}
+		return result;
+	}
+
+
+	@RequestMapping(value="/addComment", method=RequestMethod.GET)
+	@ResponseBody
+	boolean addComment(@RequestParam("articleId") int articleId,
+			@RequestParam("bodyComment") String bodyComment) {
+		boolean result = false;
+		try {
+			System.out.println("body comment = " +bodyComment);
+			Date dateCreation = new Date();
+			Date dateLastUpdate = new Date();
+			CommentEntity newComment = new CommentEntity(userConnected, dateCreation, dateLastUpdate, bodyComment, articleService.findById(articleId));
+			commentService.persist(newComment);
+			result = true;
+		}
+		catch(Exception e)
+		{
+			result = false;
+		}
+		return result;
+	}
+
+
+	@RequestMapping("/articles")
+	@ResponseBody
+	List<ArticleEntity> allArticles(){
+		List<ArticleEntity> allArticles = articleService.findAll();
+		return allArticles;
+
+	}
+
+	@RequestMapping("/comments")
+	@ResponseBody
+	List<CommentEntity> allComments(){
+		List<CommentEntity> allComments = commentService.findAll();
+		return allComments;
+
+	}
+
+	@RequestMapping(value="/lastArticleWithComments",  method=RequestMethod.GET)
+	@ResponseBody
+	JSONArray sendLastArticlesWithComments(){
+		JSONArray result = new JSONArray();
 		ArticleEntity lastArticle = articleService.getLastArticle();
+		if(lastArticle != null){
+			result.put(0, lastArticle);
+		}
+		else
+		{
+			result.put(0, "No article yet.");
+		}
+
 		List<CommentEntity> commentsLastArticle = commentService.getCommentsByArticleId(lastArticle.getId());
-		result[0] = lastArticle;
-		result[1] = commentsLastArticle;
+		if(commentsLastArticle != null)
+		{
+			result.put(1, commentsLastArticle);
+		}
+		else
+		{
+			result.put(1, "No comments yet.");
+		}			
+		System.out.println("result =" +result);
 		return result;		
 	}
 
+
+
+	/**********************************************************
+	 * 
+	 * MAIN AND CONSOLE H2
+	 *
+	 **********************************************************/
 	@Bean
 	ServletRegistrationBean h2servletRegistration(){
 		ServletRegistrationBean registrationBean = new ServletRegistrationBean( new WebServlet());

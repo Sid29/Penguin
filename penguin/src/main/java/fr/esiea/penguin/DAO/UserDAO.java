@@ -109,7 +109,7 @@ public class UserDAO {
 		}
 		catch(Exception e)
 		{
-			System.out.println("Aucun utilisateur ne correcpond à la requête.");
+			System.out.println("Aucun utilisateur ne correspond à la requête.");
 		}
 		return userConnected;
 	}

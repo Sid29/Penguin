@@ -33,14 +33,14 @@ public class ArticleService {
 		articleDao.closeCurrentSessionwithTransaction();
 	}
 
-	public ArticleEntity findById(String id) {
+	public ArticleEntity findById(int id) {
 		articleDao.openCurrentSession();
 		ArticleEntity article = articleDao.findById(id);
 		articleDao.closeCurrentSession();
 		return article;
 	}
 
-	public void delete(String id) {
+	public void delete(int id) {
 		articleDao.openCurrentSessionwithTransaction();
 		ArticleEntity article = articleDao.findById(id);
 		articleDao.delete(article);
