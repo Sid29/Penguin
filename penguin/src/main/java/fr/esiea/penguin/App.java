@@ -85,22 +85,22 @@ public class App
 		}
 		return connected;
 	}
-
-	@RequestMapping(value="/userConnected", method=RequestMethod.GET, produces="application/json")
+	
+	@RequestMapping(value="/userConnected", method=RequestMethod.GET)
 	@ResponseBody
-	JSONObject returnUserConnected(){
-		JSONObject userConnectedJSON = new JSONObject();
+	JSONArray returnUserConnected(){
+		JSONArray userConnectedJSON = new JSONArray();
 		try
 		{
-			userConnectedJSON.put("firstname", userConnected.getFirstname());
+			userConnectedJSON.put(0, userConnected);
 		}
 		catch(Exception e)
 		{
 			System.out.println(e.getStackTrace().toString());
 		}
-		System.out.println("objet json " +userConnectedJSON.get("firstname"));
 		return userConnectedJSON;
 	}
+
 
 
 	/**********************************************************

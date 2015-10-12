@@ -22,10 +22,14 @@
 				success: function() {
 					getUserConnected();
 					$("#connection").hide();
+					return true;
 				},
 				error: function() {
+					debugger;
+					getUserConnected();
 					$("#connection").hide();
 					alert('Le login et/ou le mot de passe est(sont) erroné(s).');
+					return false;
 				},
 				dataType: "json",
 				contentType : "application/json"
@@ -38,10 +42,14 @@
 				type: "GET",
 				url: "/userConnected",
 				success: function(json) {
-					alert( "success : JSON Data: " + json);
+					firstname = json[0].firstname;
+					alert('firstname userConnected =' + firstname);
+					document.getElementById("name_pengu").innerHTML = firstname;
+					return firstname;
 				},
-				error: function(json) {
-					alert("error : " + json);
+				error: function() {
+					alert('Aucun utilisateur n\'est connecté.');
+					return false;
 				},
 				dataType: "json",
 				contentType : "application/json"
@@ -76,26 +84,6 @@
 				contentType : "application/json"
 			});
 		});
-
-		//change firstname
-		$('#buttonChangeFirstname').click(function(){
-			var firstname = null;
-			$.ajax({
-				type: "GET",
-				url: "/userConnected",
-				success: function(json) {
-					firstname = $.parseJSON(json);
-					alert( "success : JSON Data: " + firstname);
-				},
-				error: function(json) {
-					firstname = $.parseJSON(json);
-					alert("error : " + firstname);
-				}
-			});
-			firstname = "je n arrive pas a decoder l objet... shiiiiiiiit";
-			document.getElementById("name_pengu").innerHTML = firstname;
-		});
-
 
 		//submitArticle
 		$('#submitArticle').click(function() {
@@ -155,34 +143,27 @@
 
 		//refresh article
 		$('#refreshLastArticle').click(function getLastArticle(){
-			var title = "";
-			var body = "";
+			var title;
+			var body;
 			var author = "";
 			var date_article = "";
 			$.ajax({
 				type: "GET",
 				url: "/lastArticleWithComments",
 				success: function(json) {
-					article = $.parseJSON(json);
-					alert(json);
-					alert(article);
-					title = article.title;
-					body = article.body;
-					alert( "success : JSON Data: " + title);
+				    title = json[0].title;
+				    author = json[0].author.firstname + " " + json[0].author.lastname;
+				    body = json[0].body;
+				    date_article = (json[0].dateCreation).toString();
+					document.getElementById("titleLastArticle").innerHTML = title;
+					document.getElementById("bodyLastArticle").innerHTML = body;
+					document.getElementById("authorLastArticle").innerHTML = author;
+					document.getElementById("dateLastArticle").innerHTML = date_article;
 				},
-				error: function(json) {
-					article = $.parseJSON(json);
-					title = article[1][title];
-					body = article[1][body];
-					alert("json = "+json);
-					alert("article = "+article);
-					alert("error : " + title);
+				error: function() {
+					alert('Il y a eu une erreur lors de la récupération des données, veuillez nous excuser.')
 				}
 			});
-			alert('title '+title);
-			alert('body '+body);
-			document.getElementById("titleLastArticle").innerHTML = title;
-			document.getElementById("bodyLastArticle").innerHTML = body;
 		});		
 		
 		
